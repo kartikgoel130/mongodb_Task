@@ -23,10 +23,22 @@ describe('Operations in our Records', function(){
       Description: "Do Exercise for 1hr",
       Completed: false
     });
+    
+     var t3 = new Task({
+      Description: "Watch Web Series",
+      Completed: true
+    });
+    var t4 = new Task({
+      Description: "Listen Music",
+      Completed: false
+    });
 
     t1.save();
 
     t2.save();
+    
+    t3.save();
+    t4.save();
   });
 
 
@@ -42,10 +54,25 @@ describe('Operations in our Records', function(){
       Description: "Do Exercise for 1hr",
       Completed: false
     });
+    
+    var t3 = new Task({
+      Description: "Watch Web Series",
+      Completed: true
+    });
+    var t4 = new Task({
+      Description: "Listen Music",
+      Completed: false
+    });
 
     t1.save();
 
     t2.save().then(function(){
+       Task.findOne({Completed: false}).then(function(result){ 
+         assert(result.Completed === false);
+         done();
+      });
+    });
+    t4.save().then(function(){
        Task.findOne({Completed: false}).then(function(result){ 
          assert(result.Completed === false);
          done();
@@ -67,12 +94,29 @@ describe('Operations in our Records', function(){
       Description: "Do Exercise for 1hr",
       Completed: false
     });
+     
+     var t3 = new Task({
+      Description: "Watch Web Series",
+      Completed: true
+    });
+    var t4 = new Task({
+      Description: "Listen Music",
+      Completed: false
+    });
 
     t1.save();
 
     t2.save().then(function(done){
       Task.findOneUpdate({Completed: false}, {Completed: true}).then(function(){
         Task.findOne({name: 'Do Exercise for 1hr'}).then(function(result){
+          asssert(result.Completed === true);
+          done();
+        });
+      });
+    });
+     t4.save().then(function(done){
+      Task.findOneUpdate({Completed: false}, {Completed: true}).then(function(){
+        Task.findOne({name: 'Listen Music'}).then(function(result){
           asssert(result.Completed === true);
           done();
         });
@@ -94,8 +138,19 @@ describe('Operations in our Records', function(){
       Description: "Do Exercise for 1hr",
       Completed: false
     });
+    
+    var t3 = new Task({
+      Description: "Watch Web Series",
+      Completed: true
+    });
+    var t4 = new Task({
+      Description: "Listen Music",
+      Completed: false
+    });
 
     t1.save();
+    t3.save();
+    t4.save();
 
     t2.save().then(function(done){
       Task.findOneAndRemove({Description: 'Do Coding for 2hr'}).then(function(){
