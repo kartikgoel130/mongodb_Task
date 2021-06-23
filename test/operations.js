@@ -153,8 +153,8 @@ describe('Operations in our Records', function(){
     t4.save();
 
     t2.save().then(function(done){
-      Task.findOneAndRemove({Description: 'Do Coding for 2hr'}).then(function(){
-        Task.findOne({Description: 'Do Coding for 2hr'}).then(function(result){
+      Task.findOneAndRemove({Description: 'Do Exercise for 1hr'}).then(function(){
+        Task.findOne({Description: 'Do Exercise for 1hr'}).then(function(result){
           asssert(result === null);
           done();
         });
